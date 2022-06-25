@@ -92,7 +92,7 @@ export class AppService {
   @Action('btc')
   async bitcoinPrice(ctx: Context){
     const symbol = "BTCUSDT"
-    this.cmcDataSymbol(symbol).then(async (result) => {
+    await this.cmcDataSymbol(symbol).then(async (result) => {
       await ctx.telegram.sendMessage(ctx.chat.id, `${result} `,
         {
           reply_markup: {
