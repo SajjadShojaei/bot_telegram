@@ -9,26 +9,51 @@ export class AppService {
     return 'Hello World!';
   }
 
-  
+
 
   @Start()
   async startCommand(ctx: Context) {
-    await ctx.reply(`Welcome ${ctx.from.first_name}`);
-    await ctx.telegram.sendMessage(ctx.chat.id, `Hello ${ctx.from.first_name}`,
+    await ctx.telegram.sendMessage(ctx.chat.id, `Welcome to my robot`,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              { text: "Click Me", callback_data: "Hi" },
+              { text: "Contact", callback_data: "contact"},
+              { text: "About Me", callback_data: "about"}
+            ]
+          ]
+        }
+      })
+  }
+
+  @Action('Hi')
+  async seyHello(ctx: Context) {
+    await ctx.telegram.sendMessage(ctx.chat.id, `Hi ${ctx.from.first_name}`,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "Go Back to Menu", callback_data: "go-back" }]
+          ]
+        }
+      })
+  }
+  @Action('go-back')
+  async menu(ctx: Context) {
+    await ctx.telegram.sendMessage(ctx.chat.id, `Welcome to my robot`,
     {
       reply_markup: {
         inline_keyboard: [
-          [{text: "Click Me", callback_data: "Hi"}]
+          [
+            { text: "Click Me", callback_data: "Hi" },
+            { text: "Contact", callback_data: "contact"},
+            { text: "About Me", callback_data: "about"}
+          ]
         ]
       }
     })
   }
 
-  @Action('Hi')
-  async seyHello(ctx:Context){
-    await ctx.reply(`Welcome ${ctx.from.first_name}`)
-  }
-  
   @Help()
   async helpCommand(ctx: Context) {
     await ctx.reply('Send me a sticker');
@@ -45,16 +70,16 @@ export class AppService {
   }
 
   @Command('inline')
-  async inlineCommand(ctx: Context){
+  async inlineCommand(ctx: Context) {
     ctx.reply("Hi there!", {
       reply_markup: {
         inline_keyboard: [
           /* Inline buttons. 2 side-by-side */
           [{ text: "Button 1", callback_data: "btn-1" }, { text: "Button 2", callback_data: "btn-2" }],
-  
+
           /* One button */
           [{ text: "Next", callback_data: "next" }],
-  
+
           /* Also, we can have URL buttons. */
           [{ text: "Open in browser", url: "telegraf.js.org" }]
         ]
@@ -68,17 +93,17 @@ export class AppService {
   }
 
   @Mention('sajji')
-  async mention(ctx: Context){
+  async mention(ctx: Context) {
     ctx.reply('hi there')
   }
 
   @Phone('09332827748')
-  async phone(ctx: Context){
+  async phone(ctx: Context) {
     await ctx.reply('this is my phone number')
   }
 
   @Hashtag('programmer')
-  async hashtag(ctx:Context){
+  async hashtag(ctx: Context) {
     await ctx.reply(`yes I'm programmer`)
   }
 
