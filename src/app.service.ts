@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Command, Hashtag, Hears, Help, Mention, On, Phone, Settings, Start, Update } from 'nestjs-telegraf';
+import { Action, Command, Hashtag, Hears, Help, Mention, On, Phone, Settings, Start, Update } from 'nestjs-telegraf';
 import { Context, Markup } from 'telegraf';
 
 @Update()
@@ -14,15 +14,21 @@ export class AppService {
   @Start()
   async startCommand(ctx: Context) {
     await ctx.reply(`Welcome ${ctx.from.first_name}`);
-    await ctx.telegram.sendMessage(ctx.chat.id, `Welcome ${ctx.from.first_name}`,
+    await ctx.telegram.sendMessage(ctx.chat.id, `Hello ${ctx.from.first_name}`,
     {
       reply_markup: {
         inline_keyboard: [
-          [{text: "Click Me", url: "www.google.com"}]
+          [{text: "Click Me", callback_data: "Hi"}]
         ]
       }
     })
   }
+
+  @Action('Hi')
+  async seyHello(ctx:Context){
+    await ctx.reply(`Welcome ${ctx.from.first_name}`)
+  }
+  
   @Help()
   async helpCommand(ctx: Context) {
     await ctx.reply('Send me a sticker');
