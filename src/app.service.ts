@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Command, Hears, Help, On, Settings, Start, Update } from 'nestjs-telegraf';
+import { Command, Hears, Help, Mention, On, Settings, Start, Update } from 'nestjs-telegraf';
 import { Context } from 'telegraf';
 
 @Update()
@@ -11,7 +11,7 @@ export class AppService {
 
   @Start()
   async startCommand(ctx: Context) {
-    await ctx.reply(`Welcome ${ctx.from.username}`);
+    await ctx.reply(`Welcome ${ctx.from.first_name}`);
   }
   @Help()
   async helpCommand(ctx: Context) {
@@ -49,6 +49,11 @@ export class AppService {
   @Settings()
   async settings(ctx: Context) {
     await ctx.reply('settings')
+  }
+
+  @Mention('sajji')
+  async mention(ctx: Context){
+    ctx.reply('hi there')
   }
 
 }
