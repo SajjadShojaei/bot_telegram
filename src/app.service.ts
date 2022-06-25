@@ -80,8 +80,8 @@ export class AppService {
           inline_keyboard: [
             [
               { text: "Bitcoin", callback_data: "btc" },
-              { text: "Ethereum", callback_data:"eth" },
-              { text: "Binance Coin", callback_data:"bnb" },
+              { text: "Ethereum", callback_data: "eth" },
+              { text: "Binance Coin", callback_data: "bnb" },
               { text: "Go Back to Menu", callback_data: "go-back" }
             ]
           ]
@@ -90,10 +90,19 @@ export class AppService {
   }
 
   @Action('btc')
-  async bitcoinPrice(ctx: Context){
+  async bitcoinPrice(ctx: Context) {
     const symbol = "BTC"
     await this.cmcDataSymbol(symbol).then(async (result) => {
-      await ctx.telegram.sendMessage(ctx.chat.id, `${result} `,
+    const data = `price: ${result.BTC.quote.USDT.price}, 
+    volume_24h: ${result.BTC.quote.USDT.volume_24h},
+    volume_change_24h: ${result.BTC.quote.USDT.volume_change_24h},
+    percent_change_1h: ${result.BTC.quote.USDT.percent_change_1h},
+    percent_change_24h: ${result.BTC.quote.USDT.percent_change_24h},
+    percent_change_7d: ${result.BTC.quote.USDT.percent_change_7d},
+    percent_change_30d: ${result.BTC.quote.USDT.percent_change_30d},
+    market_cap: ${result.BTC.quote.USDT.market_cap},
+    market_cap_dominance: ${result.BTC.quote.USDT.market_cap_dominance} `
+      await ctx.telegram.sendMessage(ctx.chat.id, `${data} `,
         {
           reply_markup: {
             inline_keyboard: [
@@ -105,10 +114,19 @@ export class AppService {
   }
 
   @Action('eth')
-  async ethereumPrice(ctx: Context){
+  async ethereumPrice(ctx: Context) {
     const symbol = "ETH"
-    this.cmcDataSymbol(symbol).then(async (result) => {
-      await ctx.telegram.sendMessage(ctx.chat.id, `${result} `,
+    await this.cmcDataSymbol(symbol).then(async (result) => {
+      const data = `price: ${result.ETH.quote.USDT.price}, 
+    volume_24h: ${result.ETH.quote.USDT.volume_24h},
+    volume_change_24h: ${result.ETH.quote.USDT.volume_change_24h},
+    percent_change_1h: ${result.ETH.quote.USDT.percent_change_1h},
+    percent_change_24h: ${result.ETH.quote.USDT.percent_change_24h},
+    percent_change_7d: ${result.ETH.quote.USDT.percent_change_7d},
+    percent_change_30d: ${result.ETH.quote.USDT.percent_change_30d},
+    market_cap: ${result.ETH.quote.USDT.market_cap},
+    market_cap_dominance: ${result.ETH.quote.USDT.market_cap_dominance} `
+      await ctx.telegram.sendMessage(ctx.chat.id, `${data} `,
         {
           reply_markup: {
             inline_keyboard: [
@@ -120,10 +138,19 @@ export class AppService {
   }
 
   @Action('bnb')
-  async bnbPrice(ctx: Context){
+  async bnbPrice(ctx: Context) {
     const symbol = "BNB"
-    this.cmcDataSymbol(symbol).then(async (result) => {
-      await ctx.telegram.sendMessage(ctx.chat.id, `${result} `,
+    await this.cmcDataSymbol(symbol).then(async (result) => {
+      const data = `price: ${result.BNB.quote.USDT.price}, 
+    volume_24h: ${result.BNB.quote.USDT.volume_24h},
+    volume_change_24h: ${result.BNB.quote.USDT.volume_change_24h},
+    percent_change_1h: ${result.BNB.quote.USDT.percent_change_1h},
+    percent_change_24h: ${result.BNB.quote.USDT.percent_change_24h},
+    percent_change_7d: ${result.BNB.quote.USDT.percent_change_7d},
+    percent_change_30d: ${result.BNB.quote.USDT.percent_change_30d},
+    market_cap: ${result.BNB.quote.USDT.market_cap},
+    market_cap_dominance: ${result.BNB.quote.USDT.market_cap_dominance} `
+      await ctx.telegram.sendMessage(ctx.chat.id, `${data} `,
         {
           reply_markup: {
             inline_keyboard: [
@@ -143,7 +170,8 @@ export class AppService {
             [
               { text: "Click Me", callback_data: "Hi" },
               { text: "Contact", callback_data: "contact" },
-              { text: "About Me", callback_data: "about" }
+              { text: "About Me", callback_data: "about" },
+              { text: "LivePrice", callback_data: "live_price" }
             ]
           ]
         }
@@ -165,7 +193,6 @@ export class AppService {
       },
     });
     const apiData = response.data.data
-
     return apiData
   }
 
