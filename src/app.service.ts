@@ -38,6 +38,28 @@ export class AppService {
         }
       })
   }
+  @Action('contact')
+  async contact(ctx: Context) {
+    await ctx.telegram.sendMessage(ctx.chat.id, `You can contact me with phone number: +989332827748`,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "Go Back to Menu", callback_data: "go-back" }]
+          ]
+        }
+      })
+  }
+  @Action('about')
+  async about(ctx: Context) {
+    await ctx.telegram.sendMessage(ctx.chat.id, `Hi there, My name is Sajjad Shojaei. Author this robot ^^`,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "Go Back to Menu", callback_data: "go-back" }]
+          ]
+        }
+      })
+  }
   @Action('go-back')
   async menu(ctx: Context) {
     await ctx.telegram.sendMessage(ctx.chat.id, `Welcome to my robot`,
