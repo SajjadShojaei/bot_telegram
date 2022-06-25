@@ -91,7 +91,7 @@ export class AppService {
 
   @Action('btc')
   async bitcoinPrice(ctx: Context){
-    const symbol = "BTCUSDT"
+    const symbol = "BTC"
     await this.cmcDataSymbol(symbol).then(async (result) => {
       await ctx.telegram.sendMessage(ctx.chat.id, `${result} `,
         {
@@ -106,7 +106,7 @@ export class AppService {
 
   @Action('eth')
   async ethereumPrice(ctx: Context){
-    const symbol = "ETHUSDT"
+    const symbol = "ETH"
     this.cmcDataSymbol(symbol).then(async (result) => {
       await ctx.telegram.sendMessage(ctx.chat.id, `${result} `,
         {
@@ -121,7 +121,7 @@ export class AppService {
 
   @Action('bnb')
   async bnbPrice(ctx: Context){
-    const symbol = "BNBUSDT"
+    const symbol = "BNB"
     this.cmcDataSymbol(symbol).then(async (result) => {
       await ctx.telegram.sendMessage(ctx.chat.id, `${result} `,
         {
