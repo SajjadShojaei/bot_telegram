@@ -29,7 +29,9 @@ export class AppService {
 
   @Action('Hi')
   async seyHello(ctx: Context) {
-    await ctx.telegram.sendMessage(ctx.chat.id, `Hi ${ctx.from.first_name}`,
+    const name = ctx.from.first_name
+    this.testfFunc(name).then(async (name) => {
+      await ctx.telegram.sendMessage(ctx.chat.id, `Hi ${name} `,
       {
         reply_markup: {
           inline_keyboard: [
@@ -37,6 +39,8 @@ export class AppService {
           ]
         }
       })
+    })
+    
   }
   @Action('contact')
   async contact(ctx: Context) {
@@ -74,6 +78,10 @@ export class AppService {
         ]
       }
     })
+  }
+
+  async testfFunc(name: string){
+    return name
   }
 
   @Help()
