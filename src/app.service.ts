@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Command, Hears, Help, On, Start, Update } from 'nestjs-telegraf';
+import { Command, Hears, Help, On, Settings, Start, Update } from 'nestjs-telegraf';
 import { Context } from 'telegraf';
 
 @Update()
@@ -44,6 +44,11 @@ export class AppService {
         ]
       }
     });
+  }
+
+  @Settings()
+  async settings(ctx: Context) {
+    await ctx.reply('settings')
   }
 
 }
