@@ -14,7 +14,14 @@ export class AppService {
   @Start()
   async startCommand(ctx: Context) {
     await ctx.reply(`Welcome ${ctx.from.first_name}`);
-    await ctx.telegram.sendMessage(ctx.chat.id, `Welcome ${ctx.from.first_name}`)
+    await ctx.telegram.sendMessage(ctx.chat.id, `Welcome ${ctx.from.first_name}`,
+    {
+      reply_markup: {
+        inline_keyboard: [
+          [{text: "Click Me", url: "www.google.com"}]
+        ]
+      }
+    })
   }
   @Help()
   async helpCommand(ctx: Context) {
