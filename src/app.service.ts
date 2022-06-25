@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Command, Hashtag, Hears, Help, Mention, On, Phone, Settings, Start, Update } from 'nestjs-telegraf';
-import { Context } from 'telegraf';
+import { Context, Markup } from 'telegraf';
 
 @Update()
 @Injectable()
@@ -9,10 +9,12 @@ export class AppService {
     return 'Hello World!';
   }
 
+  
+
   @Start()
   async startCommand(ctx: Context) {
-    await ctx.setChatMenuButton()
     await ctx.reply(`Welcome ${ctx.from.first_name}`);
+    await ctx.telegram.sendMessage(ctx.chat.id, `Welcome ${ctx.from.first_name}`)
   }
   @Help()
   async helpCommand(ctx: Context) {
