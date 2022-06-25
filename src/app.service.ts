@@ -11,7 +11,7 @@ export class AppService {
 
   @Start()
   async startCommand(ctx: Context) {
-    await ctx.reply(`Welcome ${ctx.from.first_name}`);
+    await ctx.reply(`Welcome ${ctx.from.username}`);
   }
   @Help()
   async helpCommand(ctx: Context) {
