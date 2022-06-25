@@ -93,7 +93,7 @@ export class AppService {
   async bitcoinPrice(ctx: Context) {
     const symbol = "BTC"
     await this.cmcDataSymbol(symbol).then(async (result) => {
-    const data = `price: ${result.BTC.quote.USDT.price}, 
+      const data = `price: ${result.BTC.quote.USDT.price}, 
     volume_24h: ${result.BTC.quote.USDT.volume_24h},
     volume_change_24h: ${result.BTC.quote.USDT.volume_change_24h},
     percent_change_1h: ${result.BTC.quote.USDT.percent_change_1h},
@@ -102,6 +102,7 @@ export class AppService {
     percent_change_30d: ${result.BTC.quote.USDT.percent_change_30d},
     market_cap: ${result.BTC.quote.USDT.market_cap},
     market_cap_dominance: ${result.BTC.quote.USDT.market_cap_dominance} `
+      await ctx.replyWithPhoto(`https://s2.coinmarketcap.com/static/img/coins/128x128/${result.BTC.id}.png`)
       await ctx.telegram.sendMessage(ctx.chat.id, `${data} `,
         {
           reply_markup: {
@@ -126,6 +127,7 @@ export class AppService {
     percent_change_30d: ${result.ETH.quote.USDT.percent_change_30d},
     market_cap: ${result.ETH.quote.USDT.market_cap},
     market_cap_dominance: ${result.ETH.quote.USDT.market_cap_dominance} `
+      await ctx.replyWithPhoto(`https://s2.coinmarketcap.com/static/img/coins/128x128/${result.ETH.id}.png`)
       await ctx.telegram.sendMessage(ctx.chat.id, `${data} `,
         {
           reply_markup: {
@@ -150,6 +152,7 @@ export class AppService {
     percent_change_30d: ${result.BNB.quote.USDT.percent_change_30d},
     market_cap: ${result.BNB.quote.USDT.market_cap},
     market_cap_dominance: ${result.BNB.quote.USDT.market_cap_dominance} `
+    await ctx.replyWithPhoto(`https://s2.coinmarketcap.com/static/img/coins/128x128/${result.BNB.id}.png`)
       await ctx.telegram.sendMessage(ctx.chat.id, `${data} `,
         {
           reply_markup: {
