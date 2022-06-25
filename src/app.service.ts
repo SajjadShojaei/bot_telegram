@@ -11,9 +11,8 @@ export class AppService {
 
   @Start()
   async startCommand(ctx: Context) {
+    await ctx.setChatMenuButton()
     await ctx.reply(`Welcome ${ctx.from.first_name}`);
-    await ctx.reply('{ "keyboard": [["uno :+1:"],["uno \ud83d\udc4d", "due"],["uno", "due","tre"],["uno", "due","tre","quattro"]]}');
-    
   }
   @Help()
   async helpCommand(ctx: Context) {
