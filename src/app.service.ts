@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Command, Hears, Help, Mention, On, Settings, Start, Update } from 'nestjs-telegraf';
+import { Command, Hashtag, Hears, Help, Mention, On, Phone, Settings, Start, Update } from 'nestjs-telegraf';
 import { Context } from 'telegraf';
 
 @Update()
@@ -54,6 +54,16 @@ export class AppService {
   @Mention('sajji')
   async mention(ctx: Context){
     ctx.reply('hi there')
+  }
+
+  @Phone('09332827748')
+  async phone(ctx: Context){
+    await ctx.reply('this is my phone number')
+  }
+
+  @Hashtag('programmer')
+  async hashtag(ctx:Context){
+    await ctx.reply(`yes I'm programmer`)
   }
 
 }
