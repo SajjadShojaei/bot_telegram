@@ -13,7 +13,6 @@ export class AppService {
   }
 
 
-
   @Start()
   async startCommand(ctx: Context) {
     await ctx.telegram.sendMessage(ctx.chat.id, `Welcome to my robot`,
