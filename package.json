@@ -73,7 +73,7 @@
     "testEnvironment": "node"
   },
   "engines": {
-    "node": "16.0",
+    "node": "16.13",
     "npm": "8.1"
   }
 }
