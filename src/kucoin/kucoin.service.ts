@@ -23,7 +23,6 @@ export class KucoinService {
     async getAccount(params: GetDepossitAccountParamets) {
 
         try {
-            let r = await api.getAccounts()
             let s = await api.getDepositAddress(params)            
             return s
           } catch(err) {
