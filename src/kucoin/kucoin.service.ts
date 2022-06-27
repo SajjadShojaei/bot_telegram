@@ -29,5 +29,4 @@ export class KucoinService {
             console.log(err)
           } 
     }
-
 }
